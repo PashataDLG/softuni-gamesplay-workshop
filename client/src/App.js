@@ -4,17 +4,19 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 
 import './App.css';
+import Catalog from './components/Catalog/Catalog';
 
 function App() {
     return (
         <div id="box">
             <Header />
+
             {/* Main Content */}
             <main id="main-content">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/catalog" element={<Catalog />} />
                 </Routes>
-
             </main>
 
             {/* Login Page ( Only for Guest users ) */}
