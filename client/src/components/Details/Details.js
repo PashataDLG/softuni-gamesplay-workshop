@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 const Details = () => {
     return(
@@ -34,9 +35,9 @@ const Details = () => {
                     </div>
                     {/* Edit/Delete buttons ( Only for creator of this game )  */}
                     <div className="buttons">
-                        <a href="#" className="button">
+                        <Link to="/edit" className="button">
                             Edit
-                        </a>
+                        </Link>
                         <a href="#" className="button">
                             Delete
                         </a>
