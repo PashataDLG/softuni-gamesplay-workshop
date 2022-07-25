@@ -1,8 +1,29 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-const Details = ({ games }) => {
+const Details = ({ games, addComment }) => {
     const { gameId } = useParams();
     const game = games.find(x => x._id === gameId);
+
+    const [comment, setComment] = useState({
+        username: '',
+        comment: '',
+    });
+
+    const addCommentHandler = (event) => {
+        event.preventDefault();
+
+        const result = `${comment.username}: ${comment.comment}`;
+
+        addComment(gameId, result);
+    };
+
+    const onChange = (event) => {
+        setComment(state => ({
+            ...state,
+            [event.target.name]: event.target.value,
+        }));
+    };
 
     return (
         <section id="game-details">
@@ -42,20 +63,29 @@ const Details = ({ games }) => {
                     </a>
                 </div>
             </div>
-            {/* Bonus */}
-            {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
+
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
+                <form className="form" onSubmit={addCommentHandler}>
+                    <input 
+                    type="text" 
+                    name="username" 
+                    placeholder="John Doe"
+                    onChange={onChange}
+                    value={comment.username}
+                    />
+
                     <textarea
                         name="comment"
                         placeholder="Comment......"
-                        defaultValue={""}
+                        onChange={onChange}
+                        value={comment.comment}
                     />
+
                     <input
                         className="btn submit"
                         type="submit"
-                        defaultValue="Add Comment"
+                        value="Add Comment"
                     />
                 </form>
             </article>
