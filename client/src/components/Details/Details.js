@@ -10,6 +10,12 @@ const Details = ({ games, addComment }) => {
         comment: '',
     });
 
+    const [error, setError] = useState({
+        username: '',
+        comments: '',
+
+    });
+
     const addCommentHandler = (event) => {
         event.preventDefault();
 
@@ -23,6 +29,22 @@ const Details = ({ games, addComment }) => {
             ...state,
             [event.target.name]: event.target.value,
         }));
+    };
+
+    const validateUsername = (event) => {
+        const username = event.target.value;
+        let errorMessage = '';
+
+        if (username.length < 4) {
+            errorMessage = 'Username must be longer than 4 characters';
+        } else if (username.length > 10){
+            errorMessage = 'Username must be shorter than 10 characters';
+        }
+        
+        setError(state => ({
+            ...state,
+            username: errorMessage
+        }))
     };
 
     return (
@@ -71,8 +93,13 @@ const Details = ({ games, addComment }) => {
                         name="username"
                         placeholder="John Doe"
                         onChange={onChange}
+                        onBlur={validateUsername}
                         value={comment.username}
                     />
+
+                    {error.username && 
+                        <div style={{color: 'red'}}>{error.username}</div>
+                    }
 
                     <textarea
                         name="comment"
