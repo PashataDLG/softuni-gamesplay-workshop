@@ -15,11 +15,17 @@ const request = async (method, url, data) => {
         }
         const response = await buildRequest;
 
+        if(response.ok != true){
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+
         const result = await response.json();
 
         return result;
     } catch (err) {
-        console.log(err);
+        alert(err);
+        throw err;
     }
 };
 
