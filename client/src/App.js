@@ -58,7 +58,6 @@ function App() {
         <div id="box">
             <Header />
 
-            {/* Main Content */}
             <main id="main-content">
                 <Routes>
                     <Route path="/" element={<Home games={games} />} />
@@ -70,8 +69,6 @@ function App() {
                     <Route path="/details/:gameId" element={<Details games={games} addComment={addComment} />} />
                 </Routes>
             </main>
-
-            {/* Edit Page ( Only for the creator )*/}
 
         </div>
 
