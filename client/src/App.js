@@ -15,11 +15,13 @@ import Create from './components/Create/Create';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
 
+import { useLocalStorage } from './hooks/useLocalStorage';
+
 import './App.css';
 
 function App() {
     const [games, setGames] = useState([]);
-    const [auth, setAuth] = useState({});
+    const [auth, setAuth] = useLocalStorage('auth', {});
     const navigate = useNavigate();
 
     const userLogin = (authData) => {
@@ -66,7 +68,7 @@ function App() {
     }, []);
 
     return (
-        <AuthContext.Provider value={{user: auth, userLogin, userLogout}}>
+        <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
             <div id="box">
                 <Header />
 
