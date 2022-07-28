@@ -15,7 +15,7 @@ const request = async (method, url, data) => {
         }
         const response = await buildRequest;
 
-        if(response.ok != true){
+        if(response.ok !== true){
             const error = await response.json();
             throw new Error(error.message);
         }
