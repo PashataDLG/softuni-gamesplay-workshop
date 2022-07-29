@@ -1,19 +1,25 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { GameContext } from '../../contexts/gameContext';
+import * as gameService from '../../services/gameService';
 
 const Edit = () => {
-    const { games } = useContext(GameContext);
+    const { games, editGame } = useContext(GameContext);
     const { gameId } = useParams();
+    const navigate = useNavigate();
 
     const game = games.find(x => x._id === gameId);
 
     const editHandler = (event) => {
         event.preventDefault();
 
-        const formData = Object.fromEntries(new FormData(event.target));
-        console.log(formData);
+        const gameData = Object.fromEntries(new FormData(event.target));
+        gameService.edit(gameData, gameId)
+            .then(newGameData => {
+                editGame(gameId, newGameData);
+                navigate(`/details/${gameId}`);
+            });
     };
 
     return (

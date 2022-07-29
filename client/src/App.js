@@ -56,6 +56,11 @@ function App() {
         navigate('/catalog');
     };
 
+    const editGame = (gameId, gameData) => {
+        console.log(gameData, gameId);
+        setGames(state => state.map(x => x._id === gameId ? gameData : x));
+    } 
+
     useEffect(() => {
         gameService.getAll()
             .then(result => {
@@ -67,7 +72,7 @@ function App() {
         <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
             <div id="box">
                 <Header />
-                <GameContext.Provider value={{ games, gameAdd }}>
+                <GameContext.Provider value={{ games, gameAdd, editGame }}>
                     <main id="main-content">
                         <Routes>
                             <Route path="/" element={<Home />} />
