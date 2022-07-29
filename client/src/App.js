@@ -12,6 +12,7 @@ import Logout from './components/Logout/Logout';
 import Register from './components/Register/Register';
 import Create from './components/Create/Create';
 import Details from './components/Details/Details';
+import Delete from './components/Delete/Delete';
 import Edit from './components/Edit/Edit';
 
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -57,9 +58,8 @@ function App() {
     };
 
     const editGame = (gameId, gameData) => {
-        console.log(gameData, gameId);
         setGames(state => state.map(x => x._id === gameId ? gameData : x));
-    } 
+    };
 
     useEffect(() => {
         gameService.getAll()
@@ -83,6 +83,7 @@ function App() {
                             <Route path="/edit/:gameId" element={<Edit />} />
                             <Route path="/details/:gameId" element={<Details addComment={addComment} />} />
                             <Route path="/logout" element={<Logout />} />
+                            <Route path="/delete/:gameId" element={<Delete />} />
                         </Routes>
                     </main>
                 </GameContext.Provider>
