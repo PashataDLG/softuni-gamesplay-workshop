@@ -1,10 +1,20 @@
-const Create = ({ addGameHandler }) => {
+import { useContext } from 'react';
+
+import { GameContext } from '../../contexts/gameContext';
+import * as gameService from '../../services/gameService';
+
+const Create = () => {
+    const { gameAdd } = useContext(GameContext);
+
     const onCreate = (event) => {
         event.preventDefault();
 
         const gameData = Object.fromEntries(new FormData(event.target));
 
-        addGameHandler(gameData);
+        gameService.create(gameData)
+            .then(result => {
+                gameAdd(result);
+            });
     }
 
     return (
