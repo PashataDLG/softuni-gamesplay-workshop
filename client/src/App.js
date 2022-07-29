@@ -67,16 +67,16 @@ function App() {
         <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
             <div id="box">
                 <Header />
-                <GameContext.Provider value={{allGames: games, gameAdd}}>
+                <GameContext.Provider value={{ games, gameAdd }}>
                     <main id="main-content">
                         <Routes>
-                            <Route path="/" element={<Home games={games} />} />
-                            <Route path="/catalog" element={<Catalog games={games} />} />
+                            <Route path="/" element={<Home />} />
+                            <Route path="/catalog" element={<Catalog />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/create" element={<Create />} />
-                            <Route path="/edi/:id" element={<Edit />} />
-                            <Route path="/details/:gameId" element={<Details games={games} addComment={addComment} />} />
+                            <Route path="/edit/:gameId" element={<Edit />} />
+                            <Route path="/details/:gameId" element={<Details addComment={addComment} />} />
                             <Route path="/logout" element={<Logout />} />
                         </Routes>
                     </main>

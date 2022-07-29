@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { useContext } from 'react';
+
+import { GameContext } from '../../contexts/gameContext';
 import { Link, useParams } from 'react-router-dom';
 
-const Details = ({ games, addComment }) => {
+const Details = ({ addComment }) => {
+    const { games } = useContext(GameContext);
+
     const { gameId } = useParams();
     const game = games.find(x => x._id === gameId);
 
@@ -37,10 +42,10 @@ const Details = ({ games, addComment }) => {
 
         if (username.length < 4) {
             errorMessage = 'Username must be longer than 4 characters';
-        } else if (username.length > 10){
+        } else if (username.length > 10) {
             errorMessage = 'Username must be shorter than 10 characters';
         }
-        
+
         setError(state => ({
             ...state,
             username: errorMessage
@@ -97,8 +102,8 @@ const Details = ({ games, addComment }) => {
                         value={comment.username}
                     />
 
-                    {error.username && 
-                        <div style={{color: 'red'}}>{error.username}</div>
+                    {error.username &&
+                        <div style={{ color: 'red' }}>{error.username}</div>
                     }
 
                     <textarea
